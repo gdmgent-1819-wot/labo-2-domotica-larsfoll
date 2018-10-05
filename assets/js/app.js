@@ -1,8 +1,8 @@
 const db = firebase.database();
 const domoticaWrapper = document.getElementById('domotica-wrapper');
+const homeRef = db.ref('homes/').limitToFirst(1);
 
 const setColors = () => {
-  const homeRef = db.ref('homes/').limitToFirst(1);
   homeRef.on('value', async data => {
     const { home } = await data.val();
     let homeArray = await home.map((rgbArray, i) => {
@@ -21,10 +21,6 @@ const clickableGrid = (rows, cols) => {
   const outletsArray = [25, 32, 60, 61];
   const frontDoorArray = [41, 49, 57];
   const backDoorArray = [48, 56, 64];
-  const openDoor = 'rgb(0, 255, 0)';
-  const closedDoor = 'rgb(255, 0, 0)';
-  const light_off = 'rgb(128, 128, 0)';
-  const outlet_off = 'rgb(0, 0, 128)';
   const grid = document.createElement('table');
   grid.className = 'grid';
   for (let r = 0; r < rows; ++r) {
@@ -50,10 +46,6 @@ const clickableGrid = (rows, cols) => {
               document.getElementById(id).classList.toggle('open-door');
             });
           }
-          // const currentColor = el.style.backgroundColor;
-          // el.style.backgroundColor == 'rgb(0, 0, 0)' ?
-          // el.style.backgroundColor = `#${chosenColor}` :
-          // el.style.backgroundColor = 'rgb(0, 0, 0)';
           // setColor(i);
         }
       })(cell, r, c, i), false);
@@ -62,10 +54,10 @@ const clickableGrid = (rows, cols) => {
   return grid;
 }
 
-// const setColor = (index) => {
-//   colorsArray[index-1] = rgb;
-//   db.ref('characters/').set({character: colorsArray});
-// }
+const setColor = (index) => {
+  colorsArray[index-1] = rgb;
+  db.ref('characters/').set({character: colorsArray});
+}
 
 const grid = clickableGrid(8, 8);
 setColors();
