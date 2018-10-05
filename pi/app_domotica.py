@@ -12,18 +12,7 @@ k = (0, 0, 0)
 
 y_off = (128, 128, 0)
 b_off = (0, 0, 128)
-
-home = [
-    k, k, y, k, k, y, k, k,
-    k, k, k, k, k, k, k, k,
-    k, k, k, k, k, k, k, k,
-    b, k, k, k, k, k, k, b,
-    k, k, y, k, k, y, k, k,
-    g, k, k, k, k, k, k, r,
-    g, k, k, k, k, k, k, r,
-    g, k, k, b, b, k, k, r
-]
-
+ 
 cred = credentials.Certificate('../services/firebase.json')
 default_app = firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://wot-larsfoll.firebaseio.com/'
